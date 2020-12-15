@@ -1,0 +1,4 @@
+__pycache__/
+tfp/static/img/profile_pics/*
+tfp/site.db
+!tfp/static/img/profile_pics/default.jpg
