@@ -1,0 +1,50 @@
+{% extends "admin/base_form.html" %}
+{% block meta %}
+    {{ super() }}
+    <meta name="Description" content="{{ config['APP_NAME'] }} Admin - post edit page">
+{% endblock meta %}
+{% block content %}
+    <article class="post-container form-container form-container-lg">
+        <header>
+            <h1 class="post-title">{{ post.title }}</h1>
+            <div class="post-info-header">
+                <span class="account-img-container">
+                    <img class="rounded-circle author-img" src="{{ post.author.profile_pic_path }}" alt="Picture Not Found">
+                </span>
+                <div class="post-info-description">
+                    <h2 class="post-author post-info">{{ post.author.name }}</h2>
+                    <h2 class="post-date post-info">Posted at {{ post.date_posted_formated }}</h2>
+                    {% if post.date_edited %}
+                    <h2 class="post-date-edited post-info">Last edited at {{ post.date_edited_formated }}</h2>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+        <br>
+        <div class="post-content post">
+            {{ post.content|safe }}
+        </div>
+        <div class="form-group">
+            <a class="btn btn-outline-danger" href="#" data-toggle="modal" data-target="#delete-modal" data-row-id="{{ post.title_slug }}" data-msg-id="&quot;{{ post.title }}&quot; post">Delete</a>
+            <a class="btn btn-danger" href="{{ url_back }}">Cancel</a>
+        </div>
+    </article>
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete-modal-label">Confirm post deletion?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form id="form-delete" method="POST" data-url-base="/admin/post/delete">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

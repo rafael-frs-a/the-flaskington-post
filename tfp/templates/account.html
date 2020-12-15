@@ -1,0 +1,96 @@
+{% extends "base_home.html" %}
+{% block meta %}
+    <meta name="Description" content="{{ config['APP_NAME'] }} account page">
+{% endblock meta %}
+{% block content %}
+    <div class="form-container form-container-md form-no-overflow">
+        <header class="info-user">
+            <img class="rounded-circle account-img" src="{{ current_user.profile_pic_path }}" alt="Picture Not Found">
+            <div class="info-user-description">
+                <h1>{{ current_user.name }}</h1>
+                <h2>@{{ current_user.username }}</h2>
+                <h2>{{ current_user.email }}</h2>
+            </div>
+        </header>
+        <form method="POST" class="form-account-container" enctype="multipart/form-data" novalidate>
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Account Info</legend>
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.name.label(class="form-control-label") }}
+                    {% if errors and 'name' in errors and errors['name'] %}
+                    {{ form.name(class="form-control is-invalid", placeholder="Enter your name", autofocus=true, autocapitalize="on") }}
+                    <div class="invalid-feedback">
+                        {% for error in errors['name'] %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.name(class="form-control", placeholder="Enter your name", autofocus=true, autocapitalize="on") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.picture.label(class="form-control-label") }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if errors and 'picture' in errors and errors['picture'] %}
+                    {% for error in errors['picture'] %}
+                    <small class="text-danger">{{ error }}</small><br>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.current_password.label(class="form-control-label") }}
+                    {% if errors and 'current_password' in errors and errors['current_password'] %}
+                    {{ form.current_password(class="form-control is-invalid", placeholder="Current password") }}
+                    <div class="invalid-feedback">
+                        {% for error in errors['current_password'] %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.current_password(class="form-control", placeholder="Current password") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.new_password.label(class="form-control-label") }}
+                    {% if errors and 'new_password' in errors and errors['new_password'] %}
+                    {{ form.new_password(class="form-control is-invalid", placeholder="New password") }}
+                    <div class="invalid-feedback">
+                        {% for error in errors['new_password'] %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.new_password(class="form-control", placeholder="New password") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-dark btn-block") }}
+            </div>
+        </form>
+        <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#delete-modal">Delete Account</a>
+    </div>
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete-modal-label">Confirm account deletion?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>By confirming the deletion of your account, all your data will be excluded within {{ config['ACCOUNT_DELETE_INTERVAL'] }} hours.</p>
+                    <p>Before this takes effect, your deletion request can be undone through a detailed email that will be sent to you.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form id="form-delete" method="POST" action="/account/delete">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

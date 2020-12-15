@@ -1,0 +1,17 @@
+{% extends "base_home.html" %}
+{% block meta %}
+    <meta name="Description" content="{{ config['APP_NAME'] }} Error page">
+{% endblock meta %}
+{% block content %}
+    <div class="bg-image"/>
+    <div id="container-msg-error" class="container-msg">
+        <h1>{% block code %}{% endblock %}</h1>
+        <p>{% block msg %}{% endblock %}</p>
+        {% block redirect_button %}
+        <form action="{{ url_for('home_route.home') }}">
+            <button type="submit" class="btn btn-lg btn-dark">Go Home Page</button>
+        </form>
+        {% endblock %}
+    </div>
+    <p class="bg-image-credit">Photo by Tirachard Kumtanom on Pexels</p>
+{% endblock content %}

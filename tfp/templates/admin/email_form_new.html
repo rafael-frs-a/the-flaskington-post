@@ -1,0 +1,57 @@
+{% from "icons.html" import icon %}
+{% extends "admin/base_form.html" %}
+{% block meta %}
+    {{ super() }}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <meta name="Description" content="{{ config['APP_NAME'] }} Admin - email register page">
+{% endblock meta %}
+{% block formcontent %}
+            <div class="form-group">
+                {{ form.recipient.label(class="form-control-label") }}
+                {% if errors and 'recipient' in errors and errors['recipient'] %}
+                {{ form.recipient(class="form-control is-invalid", autofocus=True) }}
+                <div class="invalid-feedback">
+                    {% for error in errors['recipient'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.recipient(class="form-control", autofocus=True) }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.subject.label(class="form-control-label") }}
+                {% if errors and 'subject' in errors and errors['subject'] %}
+                {{ form.subject(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in errors['subject'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.subject(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.body.label(class="form-control-label") }}
+                <div class="loading-container">
+                    <div class="loader"></div>
+                    <span class="loading-text">Loading editor. Please, wait.</span>
+                </div>
+                {% if errors and 'body' in errors and errors['body'] %}
+                <div class="invalid-post">
+                    {{ form.body(id="summernote", class="form-control", autocapitalize="on", disabled="disabled") }}
+                </div>
+                <small class="text-danger">
+                    {{ '. '.join(errors['body']) }}
+                </small>
+                {% else %}
+                {{ form.body(id="summernote", class="form-control", autocapitalize="on", disabled="disabled") }}
+                {% endif %}
+            </div>
+{% endblock formcontent %}
+{% block scripts %}
+    {{ super() }}
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="{{ url_for('static', filename='js/compose.js') }}" type="text/javascript"></script>
+{% endblock scripts %}

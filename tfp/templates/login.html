@@ -1,0 +1,37 @@
+{% extends "base_form.html" %}
+{% block meta %}
+    <meta name="Description" content="{{ config['APP_NAME'] }} login page">
+{% endblock meta %}
+{% block formcontent %}
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if errors and 'email' in errors and errors['email'] %}
+                {{ form.email(class="form-control lower-input is-invalid", placeholder="Email address or username", autofocus=true) }}
+                <div class="invalid-feedback">
+                    {% for error in errors['email'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.email(class="form-control lower-input", placeholder="Email address or username", autofocus=true) }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                {% if errors and 'password' in errors and errors['password'] %}
+                {{ form.password(class="form-control is-invalid", placeholder="Password") }}
+                <div class="invalid-feedback">
+                    {% for error in errors['password'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.password(class="form-control", placeholder="Password") }}
+                {% endif %}
+            </div>
+{% endblock formcontent %}
+{% block skiplink %}
+        <a class="text-dark link-underline" href="{{ url_for('register_route.register') }}">Sign up instead</a>
+        <br>
+        <a class="text-dark link-underline" href="{{ url_for('recover_account_route.recover_account') }}">Recover account</a>
+{% endblock skiplink %}

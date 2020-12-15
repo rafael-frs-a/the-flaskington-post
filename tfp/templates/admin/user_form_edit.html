@@ -1,0 +1,59 @@
+{% from "icons.html" import icon %}
+{% extends "admin/base_form.html" %}
+{% block meta %}
+    {{ super() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g==" crossorigin="anonymous" />
+    <meta name="Description" content="{{ config['APP_NAME'] }} Admin - user edit page">
+{% endblock meta %}
+{% block formcontent %}
+            <div class="form-group">
+                {{ form.roles.label(class="form-control-label") }}
+                {{ form.roles(class="form-control multi-select", autofocus=True) }}
+            </div>
+            <div class="form-group">
+                {{ form.delete_request.label(class="form-control-label") }}
+                <div class="input-group">
+                    {% if errors and 'delete_request' in errors and errors['delete_request'] %}
+                    {{ form.delete_request(class="form-control datetimepicker is-invalid") }}
+                    <div class="input-group-append" for="delete_request">
+                        <span class="input-group-text datetimepicker-icon">{{ icon('calendar') }}</span>
+                    </div>
+                    <div class="invalid-feedback">
+                        {% for error in errors['delete_request'] %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.delete_request(class="form-control datetimepicker") }}
+                    <div class="input-group-append">
+                        <span class="input-group-text datetimepicker-icon">{{ icon('calendar') }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-check">
+                {{ form.banned(class="form-check-input") }}
+                {{ form.banned.label(class="form-check-label") }}
+            </div>
+            <div class="form-group">
+                {{ form.ban_reason.label(class="form-control-label") }}
+                {% if errors and 'ban_reason' in errors and errors['ban_reason'] %}
+                {{ form.ban_reason(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in errors['ban_reason'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.ban_reason(class="form-control") }}
+                {% endif %}
+            </div>
+{% endblock formcontent %}
+{% block scripts %}
+    {{ super() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js" integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/multi_select.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/datetime_picker.js') }}" type="text/javascript"></script>
+{% endblock scripts %}

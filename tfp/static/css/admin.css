@@ -1,0 +1,91 @@
+.table-container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.cell-link {
+    font-size: 0;
+}
+
+.table-heading {
+    margin: 15px 0;
+    height: 30px;
+}
+
+.table-total {
+    position: relative;
+    top: 8px;
+    float: right;
+    font-size: 1.5em;
+}
+
+.nav-pages {
+    margin: 10px auto;
+    text-align: center;
+}
+
+.page-separator {
+    margin: 0 5px;
+}
+
+.cell-center {
+    text-align: center;
+}
+
+.cell-icon svg, .datetimepicker-icon svg {
+    height: 20px;
+    width: 20px;
+}
+
+@value --dark-color from './shared.css';
+
+.table-icon symbol path {
+    fill: var(--dark-color);
+}
+
+.th-sortable {
+    cursor: pointer;
+}
+
+.th-sort-asc::after {
+    content: '\25b4';
+}
+
+.th-sort-desc::after {
+    content: '\25be';
+}
+
+.th-sort-asc::after, .th-sort-desc::after {
+    margin-left: 8px;
+}
+
+@value --active-dark-color from './shared.css';
+
+.th-sortable:hover, .th-sort-asc, .th-sort-desc {
+    background-color: var(--active-dark-color);
+}
+
+.multi-select {
+    border: 1px solid #ced4da !important;
+}
+
+.input-group-text {
+    cursor: pointer;
+}
+
+.btn.dropdown-toggle.btn-light.bs-placeholder {
+    background-color: white;
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+    color: #757575 !important;
+}
+
+.table-responsive th, .table-responsive td {
+    vertical-align: middle !important;
+}
+
+.cell-checkbox {
+    cursor: pointer;
+}

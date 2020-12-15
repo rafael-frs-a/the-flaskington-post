@@ -1,0 +1,98 @@
+{% from "icons.html" import icon %}
+{% extends "admin/base_form.html" %}
+{% block meta %}
+    {{ super() }}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g==" crossorigin="anonymous" />
+    <meta name="Description" content="{{ config['APP_NAME'] }} Admin - email register page">
+{% endblock meta %}
+{% block formcontent %}
+            <div class="form-group">
+                {{ form.recipient.label(class="form-control-label") }}
+                {% if errors and 'recipient' in errors and errors['recipient'] %}
+                {{ form.recipient(class="form-control is-invalid", autofocus=True) }}
+                <div class="invalid-feedback">
+                    {% for error in errors['recipient'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.recipient(class="form-control", autofocus=True) }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.subject.label(class="form-control-label") }}
+                {% if errors and 'subject' in errors and errors['subject'] %}
+                {{ form.subject(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in errors['subject'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.subject(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.body.label(class="form-control-label") }}
+                <div class="loading-container">
+                    <div class="loader"></div>
+                    <span class="loading-text">Loading editor. Please, wait.</span>
+                </div>
+                {% if errors and 'body' in errors and errors['body'] %}
+                <div class="invalid-post">
+                    {{ form.body(id="summernote", class="form-control", autocapitalize="on", disabled="disabled") }}
+                </div>
+                <small class="text-danger">
+                    {{ '. '.join(errors['body']) }}
+                </small>
+                {% else %}
+                {{ form.body(id="summernote", class="form-control", autocapitalize="on", disabled="disabled") }}
+                {% endif %}
+            </div>
+            <div class="form-check">
+                {{ form.sent(class="form-check-input") }}
+                {{ form.sent.label(class="form-check-label") }}
+            </div>
+            <div class="form-group">
+                {{ form.sending_attempts.label(class="form-control-label") }}
+                {% if errors and 'sending_attempts' in errors and errors['sending_attempts'] %}
+                {{ form.sending_attempts(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in errors['sending_attempts'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.sending_attempts(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.next_sending_try.label(class="form-control-label") }}
+                <div class="input-group">
+                    {% if errors and 'next_sending_try' in errors and errors['next_sending_try'] %}
+                    {{ form.next_sending_try(class="form-control datetimepicker is-invalid") }}
+                    <div class="input-group-append" for="next_sending_try">
+                        <span class="input-group-text datetimepicker-icon">{{ icon('calendar') }}</span>
+                    </div>
+                    <div class="invalid-feedback">
+                        {% for error in errors['next_sending_try'] %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.next_sending_try(class="form-control datetimepicker") }}
+                    <div class="input-group-append">
+                        <span class="input-group-text datetimepicker-icon">{{ icon('calendar') }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+{% endblock formcontent %}
+{% block scripts %}
+    {{ super() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="{{ url_for('static', filename='js/datetime_picker.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/compose.js') }}" type="text/javascript"></script>
+{% endblock scripts %}

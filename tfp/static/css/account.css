@@ -1,0 +1,50 @@
+.account-img {
+    height: 125px;
+    width: 125px;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 500px) {
+    .account-img {
+        display: block;
+        margin: 0 auto 20px auto;
+    }
+
+    .info-user-description {
+        text-align: center;
+    }
+
+    .post-info-description {
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (min-width: 501px) {
+    .info-user, .post-info-header {
+        display: flex;
+    }
+
+    .info-user-description {
+        margin-left: 30px;
+    }
+
+    .post-info-description {
+        margin-left: 20px;
+    }
+
+    .post-info-header {
+        margin-top: 20px;
+    }
+}
+
+.info-user h1 {
+    font-size: 1.5em;
+}
+
+.info-user h2 {
+    font-size: 1.1em;
+}
+
+.form-account-container {
+    margin: 30px auto 0 auto;
+}

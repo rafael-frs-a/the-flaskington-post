@@ -1,0 +1,77 @@
+{% from "icons.html" import symbol %}
+{% extends "admin/home.html" %}
+{% block meta %}
+    {{ super() }}
+    <meta name="Description" content="{{ config['APP_NAME'] }} Admin - roles page">
+{% endblock meta %}
+{% block content %}
+    <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        {{ symbol('icon-pen') }}
+        {{ symbol('icon-trash') }}
+    </svg>
+    <div class="table-container">
+        <div class="table-heading">
+            <a class="btn btn-dark" href="{{ url_for('admin_role_route.new_role') }}">Create</a>
+            <h1 class="table-total">Total of roles: {{ roles.total }}</h1>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr class="bg-dark text-white">
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col" class="th-sortable" data-sort="id">Id</th>
+                        <th scope="col" class="th-sortable" data-sort="name">Name</th>
+                        <th scope="col" class="th-sortable" data-sort="description">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for role in roles.items %}
+                    <tr>
+                        <td class="cell-center cell-icon">
+                            <a class="cell-link" href="{{ url_for('admin_role_route.edit_role', name=role.name) }}"><svg class="icon"><use xlink:href="#icon-pen" /></svg>Edit</a>
+                        </td>
+                        <td class="cell-center cell-icon">
+                            <a class="cell-link" href="#" data-toggle="modal" data-target="#delete-modal" data-row-id="{{ role.name }}"" data-msg-id="&quot;{{ role.name }}&quot; role"><svg class="icon"><use xlink:href="#icon-trash" /></svg>Delete</a>
+                        </td>
+                        <td>{{ role.id }}</td>
+                        <td>{{ role.name }}</td>
+                        <td>{{ role.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="nav-pages">
+        {% for page_num in roles.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        {% if roles.page == page_num %}
+        <a class="btn btn-dark" href="{{ url_for('admin_role_route.role', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+        <a class="btn btn-outline-dark" href="{{ url_for('admin_role_route.role', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+        {% else %}
+        <span class="page-separator">...</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete-modal-label">Confirm deletion?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form id="form-delete" method="POST" data-url-base="/admin/role/delete">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

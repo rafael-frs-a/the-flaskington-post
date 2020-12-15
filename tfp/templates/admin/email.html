@@ -1,0 +1,129 @@
+{% from "icons.html" import symbol %}
+{% extends "admin/home.html" %}
+{% block meta %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/checkbox.css') }}">
+    <meta name="Description" content="{{ config['APP_NAME'] }} Admin - emails page">
+{% endblock meta %}
+{% block content %}
+    <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        {{ symbol('icon-pen') }}
+        {{ symbol('icon-trash') }}
+        {{ symbol('icon-times') }}
+        {{ symbol('icon-check') }}
+    </svg>
+    <div class="table-container">
+        <div class="table-heading">
+            <a class="btn btn-dark" href="{{ url_for('admin_email_route.new_email') }}">Create</a>
+            <a class="btn btn-dark" href="#" data-toggle="modal" data-target="#delete-selected-modal">Delete Selected</a>
+            <h1 class="table-total">Total of emails: {{ emails.total }}</h1>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr class="bg-dark text-white">
+                        <th scope="col" class="cell-checkbox">
+                            <label class="checkbox-label">
+                                <input type="checkbox" tabindex="-1" class="th-check">
+                                <span class="checkmark"></span>
+                            </label>
+                        </th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col" class="th-sortable" data-sort="id">Id</th>
+                        <th scope="col" class="th-sortable" data-sort="recipient_name">Recipient</th>
+                        <th scope="col" class="th-sortable" data-sort="subject">Subject</th>
+                        <th scope="col" class="th-sortable" data-sort="created_at">Created At</th>
+                        <th scope="col" class="th-sortable" data-sort="send_tries">Sending Attempts</th>
+                        <th scope="col" class="th-sortable" data-sort="next_try">Next Sending Attempt At</th>
+                        <th scope="col" class="th-sortable" data-sort="sent">Sent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for email in emails.items %}
+                    <tr>
+                        <td class="cell-checkbox">
+                            <label class="checkbox-label">
+                                <input type="checkbox" tabindex="-1" class="td-check" data-id="{{ email.id }}">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td class="cell-center cell-icon">
+                            <a class="cell-link" href="{{ url_for('admin_email_route.edit_email', id=email.id) }}"><svg class="icon"><use xlink:href="#icon-pen" /></svg>Edit</a>
+                        </td>
+                        <td class="cell-center cell-icon">
+                            <a class="cell-link" href="#" data-toggle="modal" data-target="#delete-modal" data-row-id="{{ email.id }}"" data-msg-id="{{ email.recipient.name }}'s &quot;{{ email.subject }}&quot; email"><svg class="icon"><use xlink:href="#icon-trash" /></svg>Delete</a>
+                        </td>
+                        <td>{{ email.id }}</td>
+                        <td>{{ email.recipient.name }}</td>
+                        <td>{{ email.subject }}</td>
+                        <td>{{ email.created_at_formated }}</td>
+                        <td>{{ email.send_tries }}</td>
+                        <td>{{ email.next_try_formated }}</td>
+                        <td class="cell-center cell-icon">
+                            {% if email.sent %}
+                            <svg class="icon"><use xlink:href="#icon-check" /></svg>
+                            {% else %}
+                            <svg class="icon"><use xlink:href="#icon-times" /></svg>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="nav-pages">
+        {% for page_num in emails.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        {% if emails.page == page_num %}
+        <a class="btn btn-dark" href="{{ url_for('admin_email_route.email', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+        <a class="btn btn-outline-dark" href="{{ url_for('admin_email_route.email', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+        {% else %}
+        <span class="page-separator">...</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete-modal-label">Confirm deletion?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form id="form-delete" method="POST" data-url-base="/admin/email/delete">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="delete-selected-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete-selected-modal-label">Confirm deletion?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form id="form-delete-selected" method="POST" data-url-base="/admin/email/delete">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/admin_email.js') }}" type="text/javascript"></script>
+{% endblock scripts %}

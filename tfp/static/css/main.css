@@ -1,0 +1,48 @@
+button {
+    background-color: transparent;
+    border: none;
+}
+
+body {
+    background-color: #ebebeb;
+}
+
+.alert {
+    text-align: center;
+    margin: 0;
+}
+
+.container-msg {
+    color: #333;
+    padding: 10px;
+    position: relative;
+    margin: auto;
+    top: 40vh;
+    text-align: center;
+    width: 90vw;
+}
+
+.container-msg h1 {
+    font-size: 3em;
+}
+
+@media only screen and (max-width: 500px) {
+    .container-msg {
+        font-size: 10vw;
+    }
+}
+
+@media only screen and (min-width: 501px) {
+    .container-msg {
+        font-size: 50px;
+    }
+}
+
+.link-underline {
+    text-decoration: underline;
+}
+
+.btn-success {
+    background-color: #1f8035;
+    border-color: #1f8035;
+}

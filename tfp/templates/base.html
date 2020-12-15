@@ -1,0 +1,78 @@
+{% from "icons.html" import icon %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/shared.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/form.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/post.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/account.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/error.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/icons/favicon.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ url_for('static', filename='img/icons/favicon-32.png') }}" type="image/png" sizes="32x32">
+    <link rel="icon" href="{{ url_for('static', filename='img/icons/favicon-512.png') }}" type="image/png" sizes="512x512">
+    {% block meta %}{% endblock %}
+    {% if title %}
+    <title>{{ config['APP_NAME'] }} - {{ title }}</title>
+    {% else %}
+    <title>{{ config['APP_NAME'] }}</title>
+    {% endif %}
+</head>
+<body onresize="hideCollapseBar()">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <a id="btn-home" class="navbar-brand" href="{{ url_for('home_route.home') }}"><span class="app-icon nav-icon">{{ icon('logo') }}</span>{{ config['APP_NAME'] }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% block navbar_options %}{% endblock %}
+            <ul class="navbar-nav account-container">
+                {% if current_user.is_authenticated %}
+                <li id="account-dropdown" class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                        <img class="rounded-circle navbar-img" src="{{ current_user.profile_pic_path }}" alt="Picture Not Found">
+                        {{ current_user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        {% if current_user.has_role('admin') %}
+                        <a class="dropdown-item" href="{{ url_for('admin_home_route.home') }}">Admin</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{{ url_for('account_route.account') }}">Edit Account</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ url_for('logout_route.logout') }}">Logout</a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('login_route.login') }}">Log In</a>
+                </li>
+                <li class="separator"></li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('register_route.register') }}">Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" type="text/javascript"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

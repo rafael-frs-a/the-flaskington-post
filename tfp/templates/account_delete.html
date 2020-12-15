@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <p>Hello {{ name }},</p>
+    <p>There was a request to delete your account on {{ config['APP_NAME'] }} at {{ datetime }}.
+    Your account will be excluded, along with your posts, within {{ interval }} hours from this date and time. To cancel the exclusion of your account, please click on the following link:</p>
+    <a href="{{ link }}" target="_blank">{{ link }}</a>
+</body>
+</html>

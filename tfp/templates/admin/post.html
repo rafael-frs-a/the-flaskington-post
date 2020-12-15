@@ -1,0 +1,59 @@
+{% from "icons.html" import symbol %}
+{% extends "admin/home.html" %}
+{% block meta %}
+    {{ super() }}
+    <meta name="Description" content="{{ config['APP_NAME'] }} Admin - posts page">
+{% endblock meta %}
+{% block content %}
+    <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        {{ symbol('icon-search') }}
+    </svg>
+    <div class="table-container">
+        <div class="table-heading">
+            <h1 class="table-total">Total of posts: {{ posts.total }}</h1>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr class="bg-dark text-white">
+                        <th scope="col">View</th>
+                        <th scope="col" class="th-sortable" data-sort="id">Id</th>
+                        <th scope="col" class="th-sortable" data-sort="title">Title</th>
+                        <th scope="col" class="th-sortable" data-sort="author_name">Author</th>
+                        <th scope="col" class="th-sortable" data-sort="title_slug">Identifier</th>
+                        <th scope="col" class="th-sortable" data-sort="date_posted">Posted At</th>
+                        <th scope="col" class="th-sortable" data-sort="date_edited">Edited At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts.items %}
+                    <tr>
+                        <td class="cell-center cell-icon">
+                            <a class="cell-link" href="{{ url_for('admin_post_route.view_post', title_slug=post.title_slug) }}"><svg class="icon"><use xlink:href="#icon-search" /></svg>View</a>
+                        </td>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.author.name }}</td>
+                        <td>{{ post.title_slug }}</td>
+                        <td>{{ post.date_posted_formated }}</td>
+                        <td>{{ post.date_edited_formated }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="nav-pages">
+        {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        {% if posts.page == page_num %}
+        <a class="btn btn-dark" href="{{ url_for('admin_post_route.post', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+        <a class="btn btn-outline-dark" href="{{ url_for('admin_post_route.post', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+        {% else %}
+        <span class="page-separator">...</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+{% endblock content %}

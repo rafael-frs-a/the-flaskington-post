@@ -1,0 +1,90 @@
+.navbar {
+    padding: 0;
+}
+
+.navbar-brand {
+    margin-left: 16px;
+}
+
+.navbar-brand, .nav-item, .form-inline, .nav-link {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-icon {
+    margin-right: 10px;
+}
+
+.app-icon svg {
+    height: 25px;
+    width: 25px;
+}
+
+.nav-item {
+    min-width: 60px;
+}
+
+.nav-link {
+    width: 100%;
+}
+
+@value --active-dark-color from './shared.css';
+
+.active-nav-item, .nav-item:hover {
+    background-color: var(--active-dark-color);
+}
+
+.navbar-toggler {
+    margin-right: 16px;
+}
+
+.account-container {
+    margin-left: 30px;
+    margin-right: 16px;
+}
+
+.show .account-container {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#navbarSupportedContent.show .nav-item, #navbarSupportedContent.show .form-inline {
+    padding-left: 16px;
+}
+
+#navbarSupportedContent.show .dropdown-menu {
+    position: absolute;
+    left: auto;
+    right: auto;
+    top: 95%;
+}
+
+.dropdown-item:active {
+    background-color: #eee;
+    color: #333;
+}
+
+.separator {
+    width: 1px;
+    margin: 15px 0;
+    background-color: #ccc;
+}
+
+#navbarSupportedContent.show .separator {
+    display: none;
+}
+
+.nav-form-search {
+    width: 60%;
+    max-width: 300px;
+    margin-right: 10px;
+}
+
+.navbar-img {
+    height: 25px;
+    width: 25px;
+    object-fit: cover;
+    margin-right: 10px;
+}

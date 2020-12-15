@@ -1,0 +1,33 @@
+{% extends "admin/base_form.html" %}
+{% block meta %}
+    {{ super() }}
+    <meta name="Description" content="{{ config['APP_NAME'] }} Admin - role register page">
+{% endblock meta %}
+{% block formcontent %}
+            <div class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+                {% if errors and 'name' in errors and errors['name'] %}
+                {{ form.name(class="form-control lower-input is-invalid", autofocus=true) }}
+                <div class="invalid-feedback">
+                    {% for error in errors['name'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.name(class="form-control lower-input", autofocus=true) }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.description.label(class="form-control-label") }}
+                {% if errors and 'description' in errors and errors['description'] %}
+                {{ form.description(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in errors['description'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.description(class="form-control") }}
+                {% endif %}
+            </div>
+{% endblock formcontent %}

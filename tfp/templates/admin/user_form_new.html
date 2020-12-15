@@ -1,0 +1,56 @@
+{% extends "admin/base_form.html" %}
+{% block meta %}
+    {{ super() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg==" crossorigin="anonymous" />
+    <meta name="Description" content="{{ config['APP_NAME'] }} Admin - user register page">
+{% endblock meta %}
+{% block formcontent %}
+            <div class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+                {% if errors and 'name' in errors and errors['name'] %}
+                {{ form.name(class="form-control is-invalid", placeholder="User name", autofocus=true, autocapitalize="on") }}
+                <div class="invalid-feedback">
+                    {% for error in errors['name'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.name(class="form-control", placeholder="User name", autofocus=true, autocapitalize="on") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if errors and 'email' in errors and errors['email'] %}
+                {{ form.email(class="form-control lower-input is-invalid", placeholder="Email address") }}
+                <div class="invalid-feedback">
+                    {% for error in errors['email'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.email(class="form-control lower-input", placeholder="Email address") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                {% if errors and 'password' in errors and errors['password'] %}
+                {{ form.password(class="form-control is-invalid", placeholder="Password") }}
+                <div class="invalid-feedback">
+                    {% for error in errors['password'] %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.password(class="form-control", placeholder="Password") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.roles.label(class="form-control-label") }}
+                {{ form.roles(class="form-control multi-select") }}
+            </div>
+{% endblock formcontent %}
+{% block scripts %}
+    {{ super() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js" integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg==" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/multi_select.js') }}" type="text/javascript"></script>
+{% endblock scripts %}

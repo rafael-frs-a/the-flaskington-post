@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block navbar_options %}
+            <ul class="navbar-nav mr-auto">
+                {% if current_user.is_authenticated and home %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('posts_route.new_post') }}">Compose</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% if search %}
+            <form class="form-inline search-form my-2 my-lg-0">
+                <input class="form-control nav-form-search lower-input" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            {% endif %}
+{% endblock navbar_options %}

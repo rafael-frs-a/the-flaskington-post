@@ -1,0 +1,15 @@
+{% extends "admin/home.html" %}
+{% block content %}
+    <form method="POST" class="form-container form-container-md" novalidate>
+        <fieldset class="form-group">
+            <h1><legend class="border-bottom mb-4">{{ title }}</legend></h1>
+            {{ form.hidden_tag() }}
+            {% block formcontent%}
+            {% endblock formcontent %}
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-success") }}
+            <a class="btn btn-danger" href="{{ url_back }}">Cancel</a>
+        </div>
+    </form>
+{% endblock content %}

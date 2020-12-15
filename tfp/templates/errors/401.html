@@ -1,0 +1,12 @@
+{% extends "errors/base_error.html" %}
+{% block code %}
+401
+{%- endblock %}
+{% block msg %}
+You are not authenticated
+{%- endblock %}
+{% block redirect_button %}
+        <form action="{{ url_for('login_route.login') }}">
+            <button type="submit" class="btn btn-lg btn-dark">Go Login Page</button>
+        </form>
+{% endblock %}
