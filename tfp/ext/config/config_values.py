@@ -45,6 +45,5 @@ class Config:
         'tfp.ext.url_serializer',
         'tfp.ext.logger',
         'tfp.cli.commands',
-        'tfp.site.routes',
-        'tfp.services'
+        'tfp.site.routes'
     ]
