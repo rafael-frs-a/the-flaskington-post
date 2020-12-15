@@ -48,7 +48,7 @@ class User(db.Model, UserMixin):
                            default=datetime.utcnow)
     confirmed_at = db.Column(db.DateTime)
     banned = db.Column(db.Boolean, nullable=False, default=False)
-    login_id = db.Column(db.Integer, nullable=False,
+    login_id = db.Column(db.BigInteger, nullable=False,
                          unique=True, default=get_rand_id)
     delete_request = db.Column(db.DateTime)
 
