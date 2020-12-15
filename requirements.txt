@@ -11,3 +11,4 @@ Pillow==8.0.1
 python-dotenv==0.15.0
 python-slugify==4.0.1
 gunicorn
+psycopg2
