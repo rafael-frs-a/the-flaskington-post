@@ -75,14 +75,16 @@ def get_post(title_slug):
 
 
 def get_all_posts_filter(page, filter):
-    return Post.query.join(Post.author, aliased=True).filter(or_(
-        Post.title.ilike(f'%{filter}%'), Post.content.ilike(f'%{filter}%'),
-        Post.author.has(User.name.ilike(f'%{filter}%')))).order_by(
+    return Post.query.join(Post.author, aliased=True).filter(
+        User.banned == False).filter(or_(
+            Post.title.ilike(f'%{filter}%'), Post.content.ilike(f'%{filter}%'),
+            Post.author.has(User.name.ilike(f'%{filter}%')))).order_by(
         Post.date_posted.desc(), Post.id.desc()).paginate(page=page, per_page=5)
 
 
 def get_posts_by_author_filter(page, author, filter):
-    return Post.query.filter_by(author=author).filter(or_(
-        Post.title.ilike(f'%{filter}%'), Post.content.ilike(f'%{filter}%'),
-        Post.author.has(User.name.ilike(f'%{filter}%')))).order_by(
+    return Post.query.filter_by(author=author).join(Post.author, aliased=True).filter(
+        User.banned == False).filter(or_(
+            Post.title.ilike(f'%{filter}%'), Post.content.ilike(f'%{filter}%'),
+            Post.author.has(User.name.ilike(f'%{filter}%')))).order_by(
         Post.date_posted.desc(), Post.id.desc()).paginate(page=page, per_page=5)
