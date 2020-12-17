@@ -1,3 +1,4 @@
+{% from "delete_msg.html" import delete_msg_template %}
 {% extends "admin/base_form.html" %}
 {% block meta %}
     {{ super() }}
@@ -9,7 +10,7 @@
             <h1 class="post-title">{{ post.title }}</h1>
             <div class="post-info-header">
                 <span class="account-img-container">
-                    <img class="rounded-circle author-img" src="{{ post.author.profile_pic_path }}" alt="Picture Not Found">
+                    <img class="rounded-circle author-img" src="{{ post.author.profile_pic_path }}" alt="Picture Not Found" height="50px" width="50px">
                 </span>
                 <div class="post-info-description">
                     <h2 class="post-author post-info">{{ post.author.name }}</h2>
@@ -29,22 +30,5 @@
             <a class="btn btn-danger" href="{{ url_back }}">Cancel</a>
         </div>
     </article>
-    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delete-modal-label">Confirm post deletion?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form id="form-delete" method="POST" data-url-base="/admin/post/delete">
-                        <input class="btn btn-danger" type="submit" value="Delete">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{ delete_msg_template(confirm_msg='Confirm post deletion?', url_base='/admin/post/delete') }}
 {% endblock content %}

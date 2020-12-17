@@ -30,7 +30,7 @@ def get_post_data(post, add_link):
         'posts_route.edit_post', title_slug=post.title_slug)
     post_data['author_img'] = f'''
         <a href="{url_for(route, username=post.author.username)}">
-        <img class="rounded-circle author-img" src="{post.author.profile_pic_path}" alt="Picture Not Found">
+        <img class="rounded-circle author-img" src="{post.author.profile_pic_path}" alt="Picture Not Found" height="50px" width="50px">
         </a>
         '''
 
