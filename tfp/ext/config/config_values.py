@@ -32,18 +32,13 @@ class Config:
         'pre', 'b', 'u', 'i', 'strong', 'em', 'strike', 'sub', 'sup',
         'img', 'span', 'ul', 'ol', 'li', 'a', 'div'
     ]
+
     ALLOWED_POST_ATTRIBUTES = allowed_attributes
     ALLOWED_POST_STYLES = ['color', 'background-color',
                            'text-align', 'height', 'width']
 
     EXTENSIONS = [
-        'tfp.ext.database',
-        'tfp.ext.migrate',
-        'tfp.ext.hashing',
-        'tfp.ext.login_manager',
-        'tfp.ext.mail',
-        'tfp.ext.url_serializer',
-        'tfp.ext.logger',
+        'tfp.ext',
         'tfp.cli.commands',
         'tfp.site.routes',
         'tfp.services'
