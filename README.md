@@ -36,7 +36,10 @@ If you want to run this project, you'll need to set some environment variables f
 - **DATABASE_URL**: your database location, used by SQLAlchemy object;
 - **SECRET_KEY**: used by some of the Python packages, such as SQLAlchemy and WTForms;
 - **MAIL_USERNAME**: the email address that will be used to send emails to the registered users;
-- **MAIL_PASSWORD**: the password of the previous email account.
+- **MAIL_PASSWORD**: the password of the previous email account;
+- **MAIL_SERVER**: the previous email account server. E.g.: smtp.gmail.com;
+- **MAIL_PORT**: the email account port;
+- **MAIL_USE_SSL**: boolean flag to define if the connection to the email account uses SSL or not.
 
 To make it easier, you can create a file *.env* at the root of the project informing the previous environment variables. Since the app uses python-dotenv, the variables defined in this file will be exported when the command *flask run* is executed. You can also create a separate *.flaskenv* file in the same location to define other development variables like **FLASK_APP** or **FLASK_ENV**.
 
