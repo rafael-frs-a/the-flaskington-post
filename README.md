@@ -38,7 +38,7 @@ If you want to run this project, you'll need to set some environment variables f
 - **MAIL_USERNAME**: the email address that will be used to send emails to the registered users;
 - **MAIL_PASSWORD**: the password of the previous email account.
 
-To make it easier, you can create a file *.env* at the root of the project informing the previous environment variables. Since the app uses python-dotenv, the variables defined in this file will be exported when the command *flask run* is executed. You can also create a separate file *.flaskenv* in the same location to define other development variables like **FLASK_APP** or **FLASK_ENV**.
+To make it easier, you can create a file *.env* at the root of the project informing the previous environment variables. Since the app uses python-dotenv, the variables defined in this file will be exported when the command *flask run* is executed. You can also create a separate *.flaskenv* file in the same location to define other development variables like **FLASK_APP** or **FLASK_ENV**.
 
 ## Custom Commands
 
