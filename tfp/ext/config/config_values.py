@@ -12,13 +12,13 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_SERVER = os.getenv('MAIL_SERVER')
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_DEFAULT_SENDER = (APP_NAME,
                            os.getenv('MAIL_USERNAME'))
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
-    MAIL_PORT = 465
-    MAIL_USE_SSL = True
+    MAIL_PORT = os.getenv('MAIL_PORT')
+    MAIL_USE_SSL = os.getenv('MAIL_USE_SSL')
     MAIL_MAX_EMAILS = 50
     MAIL_SEND_INTERVAL = 60  # 1 minute
 

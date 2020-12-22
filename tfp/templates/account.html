@@ -78,3 +78,6 @@
         Before this takes effect, your deletion request can be undone through a detailed email that will be sent to you.</p>
     ''', '/account/delete') }}
 {% endblock content %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/account.js') }}" type="text/javascript"></script>
+{% endblock %}

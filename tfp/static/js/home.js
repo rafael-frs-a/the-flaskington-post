@@ -68,7 +68,7 @@ window.addEventListener('mouseup', function(e) {
 
 $('#delete-modal').on('show.bs.modal', function(e) {
     var title_slug = $(e.relatedTarget).data('post-id');
-    $('#form-delete').attr('action', $('#form-delete').data('url-base') + '/' + title_slug)
+    $('#form-delete').attr('action', $('#form-delete').data('url-base') + '/' + title_slug);
 })
 
 var sentinel_template = document.querySelector('#sentinel-template').content.cloneNode(true);
