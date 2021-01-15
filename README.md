@@ -41,7 +41,7 @@ If you want to run this project, you'll need to set some environment variables f
 - **MAIL_PORT**: the email account port;
 - **MAIL_USE_SSL**: boolean flag to define if the connection to the email account uses SSL or not.
 
-To make it easier, you can create a file *.env* at the root of the project informing the previous environment variables. Since the app uses python-dotenv, the variables defined in this file will be exported when the command *flask run* is executed. You can also create a separate *.flaskenv* file in the same location to define other development variables like **FLASK_APP** or **FLASK_ENV**.
+To make it easier, you can create a *.env* file at the root of the project informing the previous environment variables. Since the app uses python-dotenv, the variables defined in this file will be exported when the command *flask run* is executed. You can also create a separate *.flaskenv* file in the same location to define other development variables like **FLASK_APP** or **FLASK_ENV**.
 
 ## Custom Commands
 
