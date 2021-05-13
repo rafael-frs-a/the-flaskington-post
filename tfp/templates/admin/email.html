@@ -53,7 +53,7 @@
                             <a class="cell-link" href="{{ url_for('admin_email_route.edit_email', id=email.id) }}"><svg class="icon"><use xlink:href="#icon-pen" /></svg>Edit</a>
                         </td>
                         <td class="cell-center cell-icon">
-                            <a class="cell-link" href="#" data-toggle="modal" data-target="#delete-modal" data-row-id="{{ email.id }}"" data-msg-id="{{ email.recipient.name }}'s &quot;{{ email.subject }}&quot; email"><svg class="icon"><use xlink:href="#icon-trash" /></svg>Delete</a>
+                            <a class="cell-link" href="#" data-toggle="modal" data-target="#delete-modal" data-row-id="{{ email.id }}" data-msg-id="{{ email.recipient.name }}'s &quot;{{ email.subject }}&quot; email"><svg class="icon"><use xlink:href="#icon-trash" /></svg>Delete</a>
                         </td>
                         <td>{{ email.id }}</td>
                         <td>{{ email.recipient.name }}</td>

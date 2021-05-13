@@ -8,12 +8,12 @@
         {% if author %}
         <div class="form-container form-container-lg form-no-overflow">
             <header class="info-user">
-            <img class="rounded-circle account-img" src="{{ author.profile_pic_path }}" alt="Picture Not Found">
-            <div class="info-user-description">
-                <h1>{{ author.name }} ({{ total_posts }} posts written)</h1>
-                <h2>@{{ author.username }}</h2>
-            </div>
-        </header>
+                <img class="rounded-circle account-img" src="{{ author.profile_pic_path }}" alt="Picture Not Found">
+                <div class="info-user-description">
+                    <h1>{{ author.name }} ({{ total_posts }} posts written)</h1>
+                    <h2>@{{ author.username }}</h2>
+                </div>
+            </header>
         </div>
         {% endif %}
     </main>

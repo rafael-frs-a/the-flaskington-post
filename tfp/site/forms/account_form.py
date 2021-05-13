@@ -1,10 +1,9 @@
 from flask import current_app
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
+from flask_wtf.file import FileField
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, ValidationError
-from tfp.site.models.user import User
+from wtforms.validators import DataRequired, Length, ValidationError
 from .validators import password_length_validation
 
 
@@ -18,6 +17,9 @@ class UpdateAccountForm(FlaskForm):
     submit = SubmitField('Save')
 
     def validate_current_password(self, password):
+        if not password.data and self.new_password.data:
+            raise ValidationError('This field is required.')
+
         if password.data and not current_user.password_match(password.data):
             raise ValidationError('Incorrect password.')
 

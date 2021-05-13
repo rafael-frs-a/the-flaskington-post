@@ -20,8 +20,6 @@ def init_email_sender(app):
                 emails = get_emails_for_sending()
 
                 if len(emails) > 0:
-                    print('Starting to send emails...')
-
                     try:
                         with mail.connect() as conn:
                             for email in emails:
@@ -45,8 +43,6 @@ def init_email_sender(app):
                         print(len(emails), 'emails sent...')
                     except:
                         pass
-                else:
-                    print('No emails found for sending...')
 
             duration = time() - start
 

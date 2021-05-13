@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from flask import abort
 from sqlalchemy import event, or_, asc, desc
 from sqlalchemy.sql import select
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -62,8 +63,12 @@ def receive_before_update(mapper, connection, target):
 
 def get_posts(per_page, page, order_field, desc_):
     direction = desc if desc_ else asc
-    return Post.query.order_by(direction(getattr(Post, order_field))).paginate(
-        per_page=per_page, page=page)
+
+    try:
+        return Post.query.order_by(direction(getattr(Post, order_field))).paginate(
+            per_page=per_page, page=page)
+    except:
+        abort(404)
 
 
 def get_title_slug(title):

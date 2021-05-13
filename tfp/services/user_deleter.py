@@ -18,19 +18,14 @@ def init_user_deleter(app):
                 users = get_users_delete(app.config['ACCOUNT_DELETE_INTERVAL'])
 
                 if len(users) > 0:
-                    print('Starting to delete users...')
-
                     for user in users:
                         db.session.delete(user)
-
                     try:
                         db.session.commit()
                     except:
                         db.session.rollback()
 
                     print(len(users), 'users deleted...')
-                else:
-                    print('No users found for deleting...')
 
             duration = time() - start
 

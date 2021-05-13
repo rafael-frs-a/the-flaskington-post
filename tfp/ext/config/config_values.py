@@ -20,9 +20,9 @@ class Config:
     MAIL_PORT = os.getenv('MAIL_PORT')
     MAIL_USE_SSL = os.getenv('MAIL_USE_SSL')
     MAIL_MAX_EMAILS = 50
-    MAIL_SEND_INTERVAL = 60  # 1 minute
+    MAIL_SEND_INTERVAL = 60 * 5  # 5 minutes
 
-    DELETE_USERS_INTERVAL = 60 * 5  # 5 minutes
+    DELETE_USERS_INTERVAL = 60 * 10  # 10 minutes
     ACCOUNT_DELETE_INTERVAL = 48  # 48 hours
 
     ALLOWED_PROFILE_PICS = ['jpg', 'jpeg', 'png']

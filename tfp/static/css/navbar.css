@@ -75,10 +75,6 @@
         margin-right: 0;
     }
 
-    #navbarSupportedContent.show .nav-item, #navbarSupportedContent.show .form-inline {
-        padding-left: 16px;
-    }
-
     #navbarSupportedContent.show .dropdown-menu {
         position: absolute;
         left: auto;

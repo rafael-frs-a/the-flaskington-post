@@ -1,7 +1,7 @@
 import os
 from datetime import datetime, timedelta
 from random import randint
-from flask import url_for, current_app
+from flask import url_for, current_app, abort
 from flask_login import UserMixin
 from sqlalchemy import asc, desc, func, event, and_
 from sqlalchemy.sql import select
@@ -174,8 +174,12 @@ class Role(db.Model):
 
 def get_users(per_page, page, order_field, desc_):
     direction = desc if desc_ else asc
-    return User.query.order_by(direction(getattr(User, order_field))).paginate(
-        per_page=per_page, page=page)
+
+    try:
+        return User.query.order_by(direction(getattr(User, order_field))).paginate(
+            per_page=per_page, page=page)
+    except:
+        abort(404)
 
 
 def get_users_delete(hours_interval):
@@ -186,5 +190,9 @@ def get_users_delete(hours_interval):
 
 def get_roles(per_page, page, order_field, desc_):
     direction = desc if desc_ else asc
-    return Role.query.order_by(direction(getattr(Role, order_field))).paginate(
-        per_page=per_page, page=page)
+
+    try:
+        return Role.query.order_by(direction(getattr(Role, order_field))).paginate(
+            per_page=per_page, page=page)
+    except:
+        abort(404)

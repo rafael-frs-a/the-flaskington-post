@@ -1,4 +1,5 @@
 from datetime import datetime
+from flask import abort
 from sqlalchemy import asc, desc, and_
 from sqlalchemy.sql import select
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -57,5 +58,9 @@ def get_emails_for_sending():
 
 def get_emails(per_page, page, order_field, desc_):
     direction = desc if desc_ else asc
-    return Email.query.order_by(direction(getattr(Email, order_field))).paginate(
-        per_page=per_page, page=page)
+
+    try:
+        return Email.query.order_by(direction(getattr(Email, order_field))).paginate(
+            per_page=per_page, page=page)
+    except:
+        abort(404)

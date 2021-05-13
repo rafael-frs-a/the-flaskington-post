@@ -22,7 +22,7 @@
     <title>{{ config['APP_NAME'] }}</title>
     {% endif %}
 </head>
-<body onresize="hideCollapseBar()">
+<body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <a id="btn-home" class="navbar-brand" href="{{ url_for('home_route.home') }}"><span class="app-icon nav-icon">{{ icon('logo') }}</span>{{ config['APP_NAME'] }}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

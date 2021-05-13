@@ -42,7 +42,7 @@
                             <a class="cell-link" href="{{ url_for('admin_user_route.edit_user', username=user.username) }}"><svg class="icon"><use xlink:href="#icon-pen" /></svg>Edit</a>
                         </td>
                         <td class="cell-center cell-icon">
-                            <a class="cell-link" href="#" data-toggle="modal" data-target="#delete-modal" data-row-id="{{ user.username }}"" data-msg-id="{{ user.username }}'s account"><svg class="icon"><use xlink:href="#icon-trash" /></svg>Delete</a>
+                            <a class="cell-link" href="#" data-toggle="modal" data-target="#delete-modal" data-row-id="{{ user.username }}" data-msg-id="{{ user.username }}'s account"><svg class="icon"><use xlink:href="#icon-trash" /></svg>Delete</a>
                         </td>
                         <td>{{ user.id }}</td>
                         <td>{{ user.name }}</td>
