@@ -50,3 +50,4 @@ The project contains three client commands that can be executed on the terminal:
 - **flask create-db**: command to create the database and all the tables defined in the models;
 - **flask drop-db**: command to drop all the tables of the database;
 - **flask create-admin**: command to create a default admin user, with username *admin* and password *admin*.
+
