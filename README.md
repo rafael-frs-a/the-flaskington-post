@@ -51,3 +51,6 @@ The project contains three client commands that can be executed on the terminal:
 - **flask drop-db**: command to drop all the tables of the database;
 - **flask create-admin**: command to create a default admin user, with username *admin* and password *admin*.
 
+# Code quality
+
+Codebeat quality review available on [this link](https://codebeat.co/projects/github-com-rafael-frs-a-the-flaskington-post-master).
