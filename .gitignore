@@ -1,4 +1,28 @@
+# Python cache
 __pycache__/
+
+# Python local virtualenv folder
+venv/
+
+# VS Code
+.vscode/
+.mypy_cache/
+
+# Pytest
+.pytest/
+
+# Coverage
+htmlcov/
+
+# Local env files
+.env*
+!.env.example
+
+# Local DB for development
+db.sqlite3
+
+# Local storage
 tfp/static/img/profile_pics/*
 tfp/site.db
 !tfp/static/img/profile_pics/default.jpg
+errorlog.txt

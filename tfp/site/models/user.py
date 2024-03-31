@@ -28,7 +28,7 @@ def get_rand_id():
     user_count = User.query.count()
 
     while True:
-        rand_int = randint(1, 1E10 + user_count)
+        rand_int = randint(1, int(1E10) + user_count)
 
         if not User.query.filter_by(login_id=rand_int).first():
             return rand_int
