@@ -2,6 +2,11 @@
 
 This is my first GitHub repository. Its idea is to be a simple blog application made in Python using the Flask framework. My main purpose here was to learn the language and framework by developing a web application with practical (although not original) use.
 
+![Screenshot 2024-03-31 132018](https://github.com/rafael-frs-a/the-flaskington-post/assets/76019940/829d6004-5362-4f73-9cce-8177de50773c)
+
+![Screenshot 2024-03-31 132052](https://github.com/rafael-frs-a/the-flaskington-post/assets/76019940/466b2d27-3c97-4cf3-a163-78033dd54272)
+
+
 # Blog Features
 
 Since it's meant to be a blog, the main feature of this web application is writing posts in a rich text editor, contemplating the basic CRUD operations. In addition, the app also counts with the following features:
